@@ -106,7 +106,6 @@ function truncate(str) {
   if (str.length < 15){
     return str;
   } else {
-    let newStr = ``
     return newStr = `${str.slice(0,8)}...`
   }
 }
@@ -163,11 +162,37 @@ function isValidPassword(str) {
 }
 
 function onlyPunchy(arr) {
+  let newArr = [];
+  // For each Title (element) in the Title Array:
   for (let i = 0; i < arr.length; i++){
-
+    let el = arr[i];
+    console.log(`el is ... ${el}`);
+    let newTitle = el;
+    // For each string character in each Title (element):
+    for (let i = 0; i < el.length; i++){
+      if (el[el.length-(i+1)] === `!`){
+        newTitle = el.slice(0, el.length-(i+1));
+      } else {
+        break;
+      }
+    }
+    arr[i] = newTitle;
+    console.log(`new title is ... ${newTitle}`);
+    console.log(arr);
   }
-
+  for (let i = 0; i < arr.length; i++){
+    if (arr[i].length < 15){
+      arr[i] += `!`;
+      console.log(`add the ! ... ${arr[i]}`)
+      newArr.push(arr[i]);
+      console.log(`newArr ... `);
+      console.log(newArr);
+    }
+  }
+  return newArr;
 }
+
+onlyPunchy(['quarantine!', 'the lord of the rings', 'the matrix!']);
 
 
 module.exports = {
