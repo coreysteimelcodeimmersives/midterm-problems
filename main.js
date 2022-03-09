@@ -112,7 +112,7 @@ function truncate(str) {
   if (str.length < 15){
     return str;
   } else {
-    return newStr = `${str.slice(0,8)}...`
+    return `${str.substring(0,8)}...`
   }
 }
 
