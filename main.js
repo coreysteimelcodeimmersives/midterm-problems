@@ -117,88 +117,112 @@ function truncate(str) {
 }
 
 function isValidPassword(str) {
-  let alphaNumericChars = `abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ`;
-  let lowerCaseChars = `abcdefghijklmnopqrstuvwxyz`;
-  let upperCaseChars = `ABCDEFGHIJKLMNOPQRSTUVWXYZ`;
-  let numChars = `12345678790`;
-  let space = ` `;
-  let boolNumbers = false;
-  let boolNoSpace = false;
-  let boolContainsUpperCase = false;
-  let boolContainsLowerCase = false;
-  let boolContainsNonAlphaNumeric = false;
-
-  for (let i = 0; i < str.length; i++){
-    if (space.includes(str[i])){
-      return false;
-    } else {
-      boolNoSpace = true;
-    }
-  }
-
-  for (let i = 0; i < str.length; i++){
-    if (lowerCaseChars.includes(str[i])){
-      boolContainsLowerCase = true;
-    }
-  }
-
-  for (let i = 0; i < str.length; i++){
-    if (upperCaseChars.includes(str[i])){
-      boolContainsUpperCase = true;
-    }
-  }
-
-  for (let i = 0; i < str.length; i++){
-    if (!alphaNumericChars.includes(str[i])){
-      boolContainsNonAlphaNumeric = true;
-    }
-  }
-
-  for (let i = 0; i < str.length; i++){
-    if (numChars.includes(str[i])){
-      boolNumbers = true;
-    }
-  }
-
-  if (boolContainsLowerCase === true && boolContainsNonAlphaNumeric === true && boolContainsUpperCase && boolNoSpace == true && boolNumbers === true){
+  if (
+    containsDigit(str) && 
+    containsLowerCase(str) && 
+    containsUpperCase(str) && 
+    containsNonAlphanumeric(str) && 
+    !containsSpace(str)){
     return true;
   } else {
     return false;
   }
 }
+  // let alphaNumericChars = `abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ`;
+  // let lowerCaseChars = `abcdefghijklmnopqrstuvwxyz`;
+  // let upperCaseChars = `ABCDEFGHIJKLMNOPQRSTUVWXYZ`;
+  // let numChars = `12345678790`;
+  // let space = ` `;
+  // let boolNumbers = false;
+  // let boolNoSpace = false;
+  // let boolContainsUpperCase = false;
+  // let boolContainsLowerCase = false;
+  // let boolContainsNonAlphaNumeric = false;
+
+  // for (let i = 0; i < str.length; i++){
+  //   if (space.includes(str[i])){
+  //     return false;
+  //   } else {
+  //     boolNoSpace = true;
+  //   }
+  // }
+
+  // for (let i = 0; i < str.length; i++){
+  //   if (lowerCaseChars.includes(str[i])){
+  //     boolContainsLowerCase = true;
+  //   }
+  // }
+
+  // for (let i = 0; i < str.length; i++){
+  //   if (upperCaseChars.includes(str[i])){
+  //     boolContainsUpperCase = true;
+  //   }
+  // }
+
+  // for (let i = 0; i < str.length; i++){
+  //   if (!alphaNumericChars.includes(str[i])){
+  //     boolContainsNonAlphaNumeric = true;
+  //   }
+  // }
+
+  // for (let i = 0; i < str.length; i++){
+  //   if (numChars.includes(str[i])){
+  //     boolNumbers = true;
+  //   }
+  // }
+
+  // if (boolContainsLowerCase === true && boolContainsNonAlphaNumeric === true && boolContainsUpperCase && boolNoSpace == true && boolNumbers === true){
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+// }
 
 function onlyPunchy(arr) {
-  let newArr = [];
-  // For each Title (element) in the Title Array:
+  let punchy = [];
   for (let i = 0; i < arr.length; i++){
-    let el = arr[i];
-    console.log(`el is ... ${el}`);
-    let newTitle = el;
-    // For each string character in each Title (element):
-    for (let i = 0; i < el.length; i++){
-      if (el[el.length-(i+1)] === `!`){
-        newTitle = el.slice(0, el.length-(i+1));
-      } else {
-        break;
-      }
-    }
-    arr[i] = newTitle;
-    console.log(`new title is ... ${newTitle}`);
-    console.log(arr);
+    arr[i] = exclaim(arr[i]);
   }
   for (let i = 0; i < arr.length; i++){
-    if (arr[i].length < 15){
-      arr[i] += `!`;
-      console.log(`add the ! ... ${arr[i]}`)
-      newArr.push(arr[i]);
-      console.log(`newArr ... `);
-      console.log(newArr);
+    if (!isLong(arr[i])){
+      punchy.push(arr[i]);
     }
   }
-  return newArr;
+  return punchy;
 }
 
-onlyPunchy(['quarantine!', 'the lord of the rings', 'the matrix!']);
+// function onlyPunchy(arr) {
+//   let newArr = [];
+//   // For each Title (element) in the Title Array:
+//   for (let i = 0; i < arr.length; i++){
+//     let el = arr[i];
+//     console.log(`el is ... ${el}`);
+//     let newTitle = el;
+//     // For each string character in each Title (element):
+//     for (let i = 0; i < el.length; i++){
+//       if (el[el.length-(i+1)] === `!`){
+//         newTitle = el.slice(0, el.length-(i+1));
+//       } else {
+//         break;
+//       }
+//     }
+//     arr[i] = newTitle;
+//     console.log(`new title is ... ${newTitle}`);
+//     console.log(arr);
+//   }
+//   for (let i = 0; i < arr.length; i++){
+//     if (arr[i].length < 15){
+//       arr[i] += `!`;
+//       console.log(`add the ! ... ${arr[i]}`)
+//       newArr.push(arr[i]);
+//       console.log(`newArr ... `);
+//       console.log(newArr);
+//     }
+//   }
+//   return newArr;
+// }
+
+// onlyPunchy(['quarantine!', 'the lord of the rings', 'the matrix!']);
 
 
 module.exports = {
