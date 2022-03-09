@@ -11,11 +11,12 @@ function halfSquare(num) {
 }
 
 function isLong(str) {
-  if (str.length >= 15){
-    return true;
-  } else {
-    return false;
-  }
+  return str.length >= 15 ? true : false;
+  // if (str.length >= 15){
+  //   return true;
+  // } else {
+  //   return false;
+  // }
 }
 
 // this works too.
@@ -25,15 +26,20 @@ function isLong(str) {
 // }
 
 function exclaim(str) {
-  let newStr = str;
-  for (let i = 0; i < str.length; i++){
-    if (str[str.length-(i+1)] === `!`){
-      newStr = str.slice(0, str.length-(i+1));
-    } else {
-      break;
-    }
+  if (str.indexOf(`!`) === -1){
+    return str + `!`;
+  } else {
+    return str.substring(0, str.indexOf(`!`)+1);
   }
-  return newStr += `!`
+  // let newStr = str;
+  // for (let i = 0; i < str.length; i++){
+  //   if (str[str.length-(i+1)] === `!`){
+  //     newStr = str.slice(0, str.length-(i+1));
+  //   } else {
+  //     break;
+  //   }
+  // }
+  // return newStr += `!`
 }
 
 function countWords(str) {
