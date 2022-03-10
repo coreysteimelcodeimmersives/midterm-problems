@@ -26,11 +26,15 @@ function isLong(str) {
 // }
 
 function exclaim(str) {
+//   return str.index(`!`) === -1 ? str +`!` : str.substring(0, str.indexOf(`!`)+1);
+// }
   if (str.indexOf(`!`) === -1){
     return str + `!`;
   } else {
     return str.substring(0, str.indexOf(`!`)+1);
   }
+}
+
   // let newStr = str;
   // for (let i = 0; i < str.length; i++){
   //   if (str[str.length-(i+1)] === `!`){
@@ -40,7 +44,7 @@ function exclaim(str) {
   //   }
   // }
   // return newStr += `!`
-}
+// }
 
 function countWords(str) {
   return str.split(` `).length;
